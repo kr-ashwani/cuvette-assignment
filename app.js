@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const authRoutes = require('./routes/authRoutes');
+const homepageRoute = require('./routes/homepage');
 const jsonPathRoutes = require('./routes/jsonPatchRoutes');
 const thumbnailRoutes = require('./routes/thumbnailRoutes');
 const addressRoutes = require('./routes/addAddress');
@@ -23,6 +24,9 @@ app.use(express.urlencoded({ extended: true }));
 
 //  enabling anyone to access api resources
 app.use(cors({}));
+
+//  all routes endpoints mentioned on homepage
+app.use(homepageRoute);
 
 //  public routes for authentication(login,signup and logout)
 app.use(authRoutes);
