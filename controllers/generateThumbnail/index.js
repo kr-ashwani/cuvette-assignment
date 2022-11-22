@@ -1,5 +1,6 @@
 const axios = require('axios');
 const path = require('path');
+const fs = require('fs');
 const sharp = require('sharp');
 
 const generateThumbnailController = async (req, res) => {
@@ -18,8 +19,9 @@ const generateThumbnailController = async (req, res) => {
     );
     sharp(buffer)
       .resize(50, 50)
-      .toFile(renameImage, (err) => {
+      .toFile(renameImage, (err, info) => {
         if (err) throw Error('Failed to convert ');
+        console.log(info);
         res.sendFile(renameImage);
       });
   } catch (err) {
